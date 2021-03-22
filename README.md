@@ -5,8 +5,8 @@ The T&C generator is software which given:
 - A template
 - A dataset
 
-Transforms the template into a Document expanding the template tags into their rappresentation
-using the dataset. Below you can find more details.
+Transforms the template into a Document expanding the template tags into their representation
+using the dataset.
 
 ## Installation
 
@@ -54,7 +54,7 @@ $ rspec tests/handlers/generate_TC_handler_tests.rb
 ### Code Structure
 
 - A simple web service using ruby rack.
-- A slexible router to map requests to handlers with the ability to be extended to support more end points.
+- A flexible router to map requests to handlers with the ability to be extended to support more end points.
 - A generic code structure so that it can be extended to support new tag types without changing the main handler.
 - A parser to parse the template and dataset with the ability to add easly more parse functions for new tag types.
 
