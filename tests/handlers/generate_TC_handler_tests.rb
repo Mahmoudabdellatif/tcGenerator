@@ -8,7 +8,7 @@ describe App do
       let(:app) { App }
       let(:response) {
         post "/", '{
-        "template": "this is template",
+        "template": "this is template [CLAUSE-1]. [SECTION-1]",
         "dataset": {
           "clauses": [{ "id": 1, "text": "clause1 text"}],
           "sections": [{ "id": 1, "clauses_ids": [1]}]
@@ -17,7 +17,7 @@ describe App do
       }
 
       it { expect(response.status).to eq 200 }
-      it { expect(response.body).to eq "T&C Generator" }
+      it { expect(response.body).to eq "this is template clause1 text. clause1 text" }
     end
 
     context "Empty Body" do
@@ -39,7 +39,7 @@ describe App do
       }
 
       it { expect(response.status).to eq 200 }
-      it { expect(response.body).to eq "T&C Generator" }
+      it { expect(response.body).to eq "this is template" }
     end
 
     context "Missing clauses" do
@@ -70,7 +70,7 @@ describe App do
       }
 
       it { expect(response.status).to eq 200 }
-      it { expect(response.body).to eq "T&C Generator" }
+      it { expect(response.body).to eq "this is template" }
     end
   end
 end

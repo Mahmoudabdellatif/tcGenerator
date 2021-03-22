@@ -1,6 +1,6 @@
 require_rel "../../constants"
 require_rel "../tags"
-require_rel "../../utils"
+require_rel "../../helper"
 
 class GenerateTCParser
   def self.parse(body)
@@ -8,16 +8,22 @@ class GenerateTCParser
 
     if (!data.nil? && !data.empty?)
       document = parse_template data["template"]
-      if (!data["dataset"].nil?)
-        clause_dataset = parse_clauses data["dataset"]["clauses"]
-        sections_dataset = parse_sections data["dataset"]["sections"] if !data["dataset"]["sections"].nil?
-      end
+      dataset = parse_dataset(data["dataset"]) if (!data["dataset"].nil?)
     else
       raise ERRORS[:MISSING_TEMPLATE]
     end
 
-    [document, clause_dataset, sections_dataset]
+    [document, dataset]
   end
+
+  def self.parse_dataset(dataset_body)
+    dataset = {}
+    dataset[Clause.key] = parse_clauses dataset_body["clauses"]
+    dataset[Section.key] = parse_sections dataset_body["sections"] if !dataset_body["sections"].nil?
+    dataset
+  end
+
+  private
 
   def self.parse_template(template)
     raise ERRORS[:MISSING_TEMPLATE] if template.nil?

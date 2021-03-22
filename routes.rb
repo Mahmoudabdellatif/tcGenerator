@@ -1,6 +1,6 @@
 require "require_all"
 require_rel "handlers"
-require_relative "utils"
+require_relative "helper"
 
 exact_path_matcher = ->(path) { ->(env) { env["PATH_INFO"] == path } }
 
