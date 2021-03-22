@@ -5,6 +5,7 @@ require_rel "../constants"
 
 GenerateTCHandler = ->(env) {
   req = Rack::Request.new(env)
+  return [405, {}, [ERRORS[:NOT_ALLOWED_METHOD]]] if (!req.post?)
 
   begin
     document, dataset = GenerateTCParser.parse req.body.read
@@ -16,8 +17,6 @@ GenerateTCHandler = ->(env) {
     replacers = dataset.map { |key, v| Module.const_get(key.to_s).replacer(dataset) }
     document = document.mgsub(replacers)
   end
-
-  puts document
 
   [200, {}, [document]]
 }

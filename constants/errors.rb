@@ -1,4 +1,5 @@
 ERRORS = {
+  NOT_ALLOWED_METHOD: "Method not allowed",
   BAD_REQUEST: "Bad Request: ",
 
   MISSING_TEMPLATE: "Missing template.",
