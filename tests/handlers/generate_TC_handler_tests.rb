@@ -78,6 +78,26 @@ describe App do
       it { expect(response.body).to eq "clause2;; template [CLAUSE-1]. ;clause2 - clause2" }
     end
 
+    context "Empty clause_ids array for a section" do
+      let(:app) { App }
+      let(:response) {
+        post "/", '{
+        "template": "[CLAUSE-1] template [SECTION-1].",
+        "dataset": {
+          "clauses": [
+            { "id": 1, "text": "clause1"}
+          ],
+          "sections": [
+            { "id": 1, "clauses_ids": []}
+          ]
+        }
+      }'
+      }
+
+      it { expect(response.status).to eq 200 }
+      it { expect(response.body).to eq "clause1 template ." }
+    end
+
     context "Get request" do
       let(:app) { App }
       let(:response) { get "/" }
